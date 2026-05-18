@@ -13,23 +13,23 @@ public class Engine {
     private int currentTick = 0;
 
     public void addPotato(Potato p) {
-        potatoes.add(potato);
+        potatoes.add(p);
     }
 
     public void addBeetle(Beetle b) {
-        beetles.add(beetle);
+        beetles.add(b);
     }
 
-    public void addFox(Fox f) {
-        foxes.add(fox);
+    public void addFox(Fox fo) {
+        foxes.add(fo);
     }
 
     public void addChicken(Chicken c) {
-        chickens.add(chicken);
+        chickens.add(c);
     }
 
-    public void addFarmer(Farmer f) {
-        farmers.add(farmer);
+    public void addFarmer(Farmer fa) {
+        farmers.add(fa);
     }
 
     public void nextTick() {
@@ -48,7 +48,7 @@ public class Engine {
             potato.grow();
         }
 
-        for (ColoradoBeetle beetle : beetles) {
+        for (Beetle beetle : beetles) {
             if (beetle.isAlive()) {
                 // логика поедания жуком картофеля beetle.eat(targetPotato)
             }
