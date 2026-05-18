@@ -60,10 +60,10 @@ public class Board {
         this.entities = new ArrayList<>();
     }
     public void moveEntity(Entity entity, int newX, int newY){
-        if(isValid(newX, newY) && grid[newX][newY] == null){
-            grid[entity.getX()][entity.getY()] = null;
-            entity.setPosition(newX, newY);
-            grid[newX][newY] = entity;
+        if(isValid(newY, newX) && grid[newY][newX] == null){
+            grid[entity.getY()][entity.getX()] = null;
+            entity.setPosition(newY, newX);
+            grid[newY][newX] = entity;
         }
     }
     private boolean isValid(int x, int y){
