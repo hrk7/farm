@@ -81,7 +81,7 @@ public class Engine {
         chickens.removeIf(chicken -> !chicken.isAlive());
         potatoes.removeIf(potato -> potato.getMass() <= 0);
     }
-
+    moveIf(potato -> potato.g
     public int getCurrentTick() {
         return currentTick;
     }

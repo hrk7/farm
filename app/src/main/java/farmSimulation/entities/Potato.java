@@ -10,7 +10,7 @@ public class Potato extends Entity{
     }
 
     @Override
-    public void tick(){
+    public void tick(Board board){
         if(mass > 0){
             mass += growthRate;
         }

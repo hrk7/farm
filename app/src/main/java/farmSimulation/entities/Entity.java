@@ -9,7 +9,7 @@ public abstract class Entity {
         this.y = y;
     }
 
-    public abstract void tick();
+    public abstract void tick(Board board);
 
     public int getX() {
         return x;
