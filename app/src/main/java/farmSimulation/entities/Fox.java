@@ -26,10 +26,10 @@ public class Fox extends Entity {
         if (targetChicken != null && targetChicken.isAlive()) {
             hunt(targetChicken);
             board.removeEntity(targetChicken);
+            System.out.println("Lis zabija kurczaka na pozycji (" + x + "," + y + ").");
         } else {
             int newX = x + random.nextInt(5) - 2;
             int newY = y + random.nextInt(5) - 2;
-
             board.moveEntity(this, newX, newY);
         }
     }
