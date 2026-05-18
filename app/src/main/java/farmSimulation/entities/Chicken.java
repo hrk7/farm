@@ -24,7 +24,7 @@ public class Chicken extends Entity {
             Potato nearbyPotato = board.findPotatoNearby(x,y,1);
             if(nearbyPotato != null && nearbyPotato.getMass() > 0){
                 System.out.println("Brak stonki. Kura podjada ziemniaka na (" + nearbyPotato.getX() + "," + nearbyPotato.getY() + ").");
-                nearbyPotato.consume(0.5);
+                nearbyPotato.consume(1.5);
                 if(!nearbyPotato.isAlive()){
                     board.removeEntity(nearbyPotato);
                 }
