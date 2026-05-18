@@ -1,5 +1,7 @@
 package farmSimulation.entities;
 
+import farmSimulation.base.Board;
+
 public class Potato extends Entity{
     private double mass;
     private final double growthRate = 0.5;

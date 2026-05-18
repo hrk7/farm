@@ -1,4 +1,6 @@
 package farmSimulation.entities;
+import farmSimulation.base.Board;
+
 import java.util.Random;
 
 public class Beetle extends Entity{

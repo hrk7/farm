@@ -1,4 +1,7 @@
 package farmSimulation.entities;
+
+import farmSimulation.base.Board;
+
 public abstract class Entity {
     protected int x;
     protected int y;

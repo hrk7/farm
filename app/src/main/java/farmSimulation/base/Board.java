@@ -1,4 +1,9 @@
-package farmSimulation.entities;
+package farmSimulation.base;
+import farmSimulation.entities.Beetle;
+import farmSimulation.entities.Chicken;
+import farmSimulation.entities.Entity;
+import farmSimulation.entities.Potato;
+
 import java.util.ArrayList;
 import java.util.List;
 
