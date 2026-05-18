@@ -18,18 +18,21 @@ public class Farmer extends Entity {
         if (nearbyPotato != null && nearbyPotato.getMass() > 5.0) {
             harvest(nearbyPotato);
             board.removeEntity(nearbyPotato);
+            System.out.println("Farmer zbiera ziemniaka na pozycji (" + x + "," + y + ").");
         }
 
         Beetle nearbyBeetle = board.findBeetleNearby(x, y, 2);
         if (nearbyBeetle != null && nearbyBeetle.isAlive()) {
             nearbyBeetle.die();
             board.removeEntity(nearbyBeetle);
+            System.out.println("Farmer zabija stonkę na pozycji (" + x + "," + y + ").");
         }
 
         Fox nearbyFox = board.findFoxNearby(x, y, 2);
         if(nearbyFox != null && nearbyFox.isAlive()){
             nearbyFox.die();
             board.removeEntity(nearbyFox);
+            System.out.println("Farmer zabija lisa na pozycji (" + x + "," + y + ").");
         }
     }
 
