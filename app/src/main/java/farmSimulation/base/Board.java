@@ -1,8 +1,5 @@
 package farmSimulation.base;
-import farmSimulation.entities.Beetle;
-import farmSimulation.entities.Chicken;
-import farmSimulation.entities.Entity;
-import farmSimulation.entities.Potato;
+import farmSimulation.entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +32,13 @@ public class Board {
     public Beetle findBeetleNearby(int cx, int cy){
         return (Beetle) findTypeNearby(cx, cy, Beetle.class);
    }
-   public Chicken findChickenNearby(int cx, int cy){
+    public Chicken findChickenNearby(int cx, int cy){
         return (Chicken) findTypeNearby(cx, cy, Chicken.class);
    }
-   private Entity findTypeNearby(int cx, int cy, Class<?> type){
+    public Fox findFoxNearby(int cx, int cy){
+        return (Fox) findTypeNearby(cx, cy, Fox.class);
+    }
+    private Entity findTypeNearby(int cx, int cy, Class<?> type){
         for(int dx = -1; dx <= 1; dx++){
             for(int dy = -1; dy <= 1; dy++){
                 int nx = cx + dx;

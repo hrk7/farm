@@ -1,5 +1,7 @@
 package farmSimulation.entities;
 
+import farmSimulation.base.Board;
+
 import java.util.Random;
 
 public class Chicken extends Entity {
