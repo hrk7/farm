@@ -3,6 +3,12 @@ package farmSimulation.base;
 import java.util.ArrayList;
 import java.util.List;
 
+import farmSimulation.entities.Potato;
+import farmSimulation.entities.Beetle;
+import farmSimulation.entities.Fox;
+import farmSimulation.entities.Chicken;
+import farmSimulation.entities.Farmer;
+
 public class Engine {
     private List<Potato> potatoes = new ArrayList<>();
     private List<Beetle> beetles = new ArrayList<>();
@@ -13,23 +19,23 @@ public class Engine {
     private int currentTick = 0;
 
     public void addPotato(Potato p) {
-        potatoes.add(potato);
+        potatoes.add(p);
     }
 
     public void addBeetle(Beetle b) {
-        beetles.add(beetle);
+        beetles.add(b);
     }
 
-    public void addFox(Fox f) {
-        foxes.add(fox);
+    public void addFox(Fox fo) {
+        foxes.add(fo);
     }
 
     public void addChicken(Chicken c) {
-        chickens.add(chicken);
+        chickens.add(c);
     }
 
-    public void addFarmer(Farmer f) {
-        farmers.add(farmer);
+    public void addFarmer(Farmer fa) {
+        farmers.add(fa);
     }
 
     public void nextTick() {
@@ -45,10 +51,10 @@ public class Engine {
 
     private void runGrowthAndPestPhase() {
         for (Potato potato : potatoes) {
-            potato.grow();
+            potato.tick();
         }
 
-        for (ColoradoBeetle beetle : beetles) {
+        for (Beetle beetle : beetles) {
             if (beetle.isAlive()) {
                 // логика поедания жуком картофеля beetle.eat(targetPotato)
             }
@@ -64,8 +70,23 @@ public class Engine {
     private void runChickenResponsePhase() {
         for (Chicken chicken : chickens) {
             if (chicken.isAlive()) {
-                // логика взаимодействия куры с жуками или картофелем chicken.interact(targetBeetle, targetPotato);
-                // +логика побега если рядом лиса
+                Beetle targetBeetle = null;
+                for (Beetle beetle : beetles) {
+                    if (beetle.isAlive() && beetle.getX() == chicken.getX() && beetle.getY() == chicken.getY()) {
+                        targetBeetle = beetle;
+                        break;
+                    }
+                }
+
+                Potato targetPotato = null;
+                for (Potato potato : potatoes) {
+                    if (potato.getMass() > 0 && potato.getX() == chicken.getX() && potato.getY() == chicken.getY()) {
+                        targetPotato = potato;
+                        break;
+                    }
+                }
+
+                chicken.interact(targetBeetle, targetPotato);
             }
         }
     }
