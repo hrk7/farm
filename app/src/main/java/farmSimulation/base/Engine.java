@@ -70,8 +70,23 @@ public class Engine {
     private void runChickenResponsePhase() {
         for (Chicken chicken : chickens) {
             if (chicken.isAlive()) {
-                // логика взаимодействия куры с жуками или картофелем chicken.interact(targetBeetle, targetPotato);
-                // +логика побега если рядом лиса
+                Beetle targetBeetle = null;
+                for (Beetle beetle : beetles) {
+                    if (beetle.isAlive() && beetle.getX() == chicken.getX() && beetle.getY() == chicken.getY()) {
+                        targetBeetle = beetle;
+                        break;
+                    }
+                }
+
+                Potato targetPotato = null;
+                for (Potato potato : potatoes) {
+                    if (potato.getMass() > 0 && potato.getX() == chicken.getX() && potato.getY() == chicken.getY()) {
+                        targetPotato = potato;
+                        break;
+                    }
+                }
+
+                chicken.interact(targetBeetle, targetPotato);
             }
         }
     }
