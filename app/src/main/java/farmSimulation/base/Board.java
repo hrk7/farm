@@ -59,11 +59,11 @@ public class Board {
         this.grid = new Entity[height][width];
         this.entities = new ArrayList<>();
     }
-    public void moveEntity(Entity entity, int newX, int newY){
-        if(isValid(newX, newY) && grid[newX][newY] == null){
+    public void moveEntity(Entity entity, int newY, int newX){
+        if(isValid(newX, newY) && grid[newY][newX] == null){
             grid[entity.getX()][entity.getY()] = null;
-            entity.setPosition(newX, newY);
-            grid[newX][newY] = entity;
+            entity.setPosition(newY, newX);
+            grid[newY][newX] = entity;
         }
     }
     private boolean isValid(int x, int y){
@@ -91,6 +91,19 @@ public class Board {
                     return grid[ny][nx];
                 }
             }
+        }
+        return null;
+    }
+
+    public int getWidth() {
+        return this.width;
+    }
+    public int getHeight() {
+        return this.height;
+    }
+    public Entity getEntityAt(int x, int y) {
+        if (x >= 0 && x < width && y >= 0 && y < height) {
+            return this.grid[y][x];
         }
         return null;
     }
