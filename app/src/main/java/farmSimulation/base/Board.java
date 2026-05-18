@@ -107,4 +107,19 @@ public class Board {
         }
         System.out.println("=========");
     }
+
+    public int getWidth() {
+        return this.width;
+    }
+    public int getHeight() {
+        return this.height;
+    }
+
+    public Entity getEntityAt(int x, int y) {
+        if (x >= 0 && x < width && y >= 0 && y < height) {
+            return this.grid[y][x];
+        }
+        return null;
+    }
 }
+
