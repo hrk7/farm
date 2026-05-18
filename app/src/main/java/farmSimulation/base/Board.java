@@ -59,11 +59,11 @@ public class Board {
         this.grid = new Entity[height][width];
         this.entities = new ArrayList<>();
     }
-    public void moveEntity(Entity entity, int newY, int newX){
-        if(isValid(newX, newY) && grid[newY][newX] == null){
+    public void moveEntity(Entity entity, int newX, int newY){
+        if(isValid(newX, newY) && grid[newX][newY] == null){
             grid[entity.getX()][entity.getY()] = null;
-            entity.setPosition(newY, newX);
-            grid[newY][newX] = entity;
+            entity.setPosition(newX, newY);
+            grid[newX][newY] = entity;
         }
     }
     private boolean isValid(int x, int y){
@@ -94,17 +94,17 @@ public class Board {
         }
         return null;
     }
-
-    public int getWidth() {
-        return this.width;
-    }
-    public int getHeight() {
-        return this.height;
-    }
-    public Entity getEntityAt(int x, int y) {
-        if (x >= 0 && x < width && y >= 0 && y < height) {
-            return this.grid[y][x];
+    public void display(){
+        for(int x = 0; x < width; x++){
+            for(int y = 0; y < height; y++){
+                if(grid[y][x] == null){
+                    System.out.print(". ");
+                } else {
+                    System.out.print(grid[y][x].getSymbol() + " ");
+                }
+                System.out.println();
+            }
         }
-        return null;
+        System.out.println("=========");
     }
 }
