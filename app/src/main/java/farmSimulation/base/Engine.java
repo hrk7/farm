@@ -3,6 +3,12 @@ package farmSimulation.base;
 import java.util.ArrayList;
 import java.util.List;
 
+import farmSimulation.entities.Potato;
+import farmSimulation.entities.Beetle;
+import farmSimulation.entities.Fox;
+import farmSimulation.entities.Chicken;
+import farmSimulation.entities.Farmer;
+
 public class Engine {
     private List<Potato> potatoes = new ArrayList<>();
     private List<Beetle> beetles = new ArrayList<>();
@@ -45,7 +51,7 @@ public class Engine {
 
     private void runGrowthAndPestPhase() {
         for (Potato potato : potatoes) {
-            potato.grow();
+            potato.tick();
         }
 
         for (Beetle beetle : beetles) {
