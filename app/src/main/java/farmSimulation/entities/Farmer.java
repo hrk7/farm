@@ -14,12 +14,12 @@ public class Farmer extends Entity {
     public void tick(Board board) {
         if (!isAlive()) return;
 
-        Potato nearbyPotato = board.findPotatoNearby(x, y);
+        Potato nearbyPotato = board.findPotatoNearby(x, y, 3);
         if (nearbyPotato != null && nearbyPotato.getMass() > 5.0) {
             harvest(nearbyPotato);
         }
 
-        Beetle nearbyBeetle = board.findBeetleNearby(x, y);
+        Beetle nearbyBeetle = board.findBeetleNearby(x, y, 3);
         if (nearbyBeetle != null && nearbyBeetle.isAlive()) {
             nearbyBeetle.die();
         }

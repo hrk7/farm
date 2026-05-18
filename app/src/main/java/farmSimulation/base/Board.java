@@ -26,28 +26,29 @@ public class Board {
     private boolean isValid(int x, int y){
         return  x >= 0 && x < width && y >= 0 && y < height;
     }
-    public Potato findPotatoNearby(int cx, int cy){
-        return (Potato) findTypeNearby(cx, cy, Potato.class);
+    public Potato findPotatoNearby(int cx, int cy, int r){
+        return (Potato) findTypeNearby(cx, cy, Potato.class, r);
     }
-    public Beetle findBeetleNearby(int cx, int cy){
-        return (Beetle) findTypeNearby(cx, cy, Beetle.class);
+    public Beetle findBeetleNearby(int cx, int cy, int r){
+        return (Beetle) findTypeNearby(cx, cy, Beetle.class, r);
    }
-    public Chicken findChickenNearby(int cx, int cy){
-        return (Chicken) findTypeNearby(cx, cy, Chicken.class);
+    public Chicken findChickenNearby(int cx, int cy, int r){
+        return (Chicken) findTypeNearby(cx, cy, Chicken.class, r);
    }
-    public Fox findFoxNearby(int cx, int cy){
-        return (Fox) findTypeNearby(cx, cy, Fox.class);
+    public Fox findFoxNearby(int cx, int cy, int r){
+        return (Fox) findTypeNearby(cx, cy, Fox.class, r);
     }
-    private Entity findTypeNearby(int cx, int cy, Class<?> type){
-        for(int dx = -1; dx <= 1; dx++){
-            for(int dy = -1; dy <= 1; dy++){
+
+    private Entity findTypeNearby(int cx, int cy, Class<?> type, int range) {
+        for (int dx = -range; dx <= range; dx++) {
+            for (int dy = -range; dy <= range; dy++) {
                 int nx = cx + dx;
                 int ny = cy + dy;
-                if(isValid(nx, ny) && grid[nx][ny] != null && type.isInstance(grid[nx][ny])){
-                    return grid[nx][ny];
+                if (isValid(nx, ny) && grid[ny][nx] != null && type.isInstance(grid[ny][nx])) {
+                    return grid[ny][nx];
                 }
             }
         }
         return null;
-   }
+    }
 }

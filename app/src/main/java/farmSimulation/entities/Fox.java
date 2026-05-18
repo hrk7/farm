@@ -21,7 +21,7 @@ public class Fox extends Entity {
     public void tick(Board board) {
         if (!isAlive()) return;
 
-        Chicken targetChicken = board.findChickenNearby(x, y);
+        Chicken targetChicken = board.findChickenNearby(x, y, 1);
 
         if (targetChicken != null && targetChicken.isAlive()) {
             hunt(targetChicken);

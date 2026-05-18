@@ -14,7 +14,7 @@ public class Beetle extends Entity{
     public void tick(Board board){
         if(!isAlive()) return;
 
-        Potato potato = board.findPotatoNearby(x, y);
+        Potato potato = board.findPotatoNearby(x, y, 1);
         if(potato != null){
            potato.consume(1.0);
            System.out.println("Stonka żeruje na ziemniaku na pozycji (" + x + "," + y + ").");
