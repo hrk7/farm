@@ -1,6 +1,8 @@
+package farmSimulation.entities;
 public abstract class Entity {
     protected int x;
     protected int y;
+    protected boolean alive = true;
 
     public Entity(int x, int y) {
         this.x = x;
@@ -20,4 +22,7 @@ public abstract class Entity {
         this.x = x;
         this.y = y;
     }
+    public boolean isAlive(){ return alive;}
+    public void die() { this.alive = false;}
+    public abstract char getSymbol();
 }
