@@ -15,6 +15,7 @@ public class Engine {
     private List<Fox> foxes = new ArrayList<>();
     private List<Chicken> chickens = new ArrayList<>();
     private List<Farmer> farmers = new ArrayList<>();
+    private Board board;
 
     private int currentTick = 0;
 
@@ -51,55 +52,38 @@ public class Engine {
 
     private void runGrowthAndPestPhase() {
         for (Potato potato : potatoes) {
-            potato.tick();
+            potato.tick(board);
         }
 
         for (Beetle beetle : beetles) {
             if (beetle.isAlive()) {
-                // логика поедания жуком картофеля beetle.eat(targetPotato)
+                beetle.tick(board);
             }
         }
     }
 
     private void runThreatPhase() {
         for (Fox fox : foxes) {
-            // логика поиска курицы и атаки в случае нахождения fox.hunt(targetChicken);
+            fox.tick(board);
         }
     }
 
     private void runChickenResponsePhase() {
         for (Chicken chicken : chickens) {
-            if (chicken.isAlive()) {
-                Beetle targetBeetle = null;
-                for (Beetle beetle : beetles) {
-                    if (beetle.isAlive() && beetle.getX() == chicken.getX() && beetle.getY() == chicken.getY()) {
-                        targetBeetle = beetle;
-                        break;
-                    }
-                }
-
-                Potato targetPotato = null;
-                for (Potato potato : potatoes) {
-                    if (potato.getMass() > 0 && potato.getX() == chicken.getX() && potato.getY() == chicken.getY()) {
-                        targetPotato = potato;
-                        break;
-                    }
-                }
-
-                chicken.interact(targetBeetle, targetPotato);
-            }
+            chicken.tick(board);
         }
     }
 
     private void runFarmerPhase() {
         for (Farmer farmer : farmers) {
-            // логика защиты farmer.protect(...) и сбора урожая farmer.harvest(...)
+            farmer.tick(board);
         }
     }
 
     private void cleanUpDeadEntities() {
         beetles.removeIf(beetle -> !beetle.isAlive());
         chickens.removeIf(chicken -> !chicken.isAlive());
+        foxes.removeIf(fox -> !fox.isAlive());
         potatoes.removeIf(potato -> potato.getMass() <= 0);
     }
 }
