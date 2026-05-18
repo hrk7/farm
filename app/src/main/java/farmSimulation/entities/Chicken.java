@@ -25,6 +25,9 @@ public class Chicken extends Entity {
             if(nearbyPotato != null && nearbyPotato.getMass() > 0){
                 System.out.println("Brak stonki. Kura podjada ziemniaka na (" + nearbyPotato.getX() + "," + nearbyPotato.getY() + ")");
                 nearbyPotato.consume(0.5);
+                if(!nearbyPotato.isAlive()){
+                    board.removeEntity(nearbyPotato);
+                }
             }
             else {
                 int newX = x + random.nextInt(3) - 1;

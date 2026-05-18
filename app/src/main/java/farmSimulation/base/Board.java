@@ -94,4 +94,17 @@ public class Board {
         }
         return null;
     }
+    public void display(){
+        for(int x = 0; x < width; x++){
+            for(int y = 0; y < height; y++){
+                if(grid[y][x] == null){
+                    System.out.print(". ");
+                } else {
+                    System.out.print(grid[y][x].getSymbol() + " ");
+                }
+                System.out.println();
+            }
+        }
+        System.out.println("=========");
+    }
 }
