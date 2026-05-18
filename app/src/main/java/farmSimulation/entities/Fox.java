@@ -25,6 +25,7 @@ public class Fox extends Entity {
 
         if (targetChicken != null && targetChicken.isAlive()) {
             hunt(targetChicken);
+            board.removeEntity(targetChicken);
         } else {
             int newX = x + random.nextInt(5) - 2;
             int newY = y + random.nextInt(5) - 2;

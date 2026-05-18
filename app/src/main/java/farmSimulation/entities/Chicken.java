@@ -15,15 +15,16 @@ public class Chicken extends Entity {
     public void tick(Board board) {
         if (!isAlive()) return;
 
-        Beetle beetle = board.findBeetleNearby(x,y,1);
-        if(beetle != null && beetle.isAlive()){
-            System.out.println("Kura zjada stonkę na pozycji (" + beetle.getX() + "," + beetle.getY() + ")!");
-            beetle.die();
+        Beetle nearbyBeetle = board.findBeetleNearby(x,y,1);
+        if(nearbyBeetle != null && nearbyBeetle.isAlive()){
+            System.out.println("Kura zjada stonkę na pozycji (" + nearbyBeetle.getX() + "," + nearbyBeetle.getY() + ")!");
+            nearbyBeetle.die();
+            board.removeEntity(nearbyBeetle);
         } else {
-            Potato potato = board.findPotatoNearby(x,y,1);
-            if(potato != null && potato.getMass() > 0){
-                System.out.println("Brak stonki. Kura podjada ziemniaka na (" + potato.getX() + "," + potato.getY() + ")");
-                potato.consume(0.5);
+            Potato nearbyPotato = board.findPotatoNearby(x,y,1);
+            if(nearbyPotato != null && nearbyPotato.getMass() > 0){
+                System.out.println("Brak stonki. Kura podjada ziemniaka na (" + nearbyPotato.getX() + "," + nearbyPotato.getY() + ")");
+                nearbyPotato.consume(0.5);
             }
             else {
                 int newX = x + random.nextInt(3) - 1;

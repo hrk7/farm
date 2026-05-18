@@ -10,6 +10,49 @@ public class Board {
     private Entity[][] grid;
     private List<Entity> entities;
 
+    public void addEntity(Entity entity){
+        if(isValid(entity.getX(), entity.getY()) && grid[entity.getY()][entity.getX()] == null){
+            grid[entity.getY()][entity.getX()] = entity;
+            entities.add(entity);
+        }
+    }
+
+    public void removeEntity(Entity entity){
+        if(isValid(entity.getX(), entity.getY()) && grid[entity.getY()][entity.getX()] == entity){
+            grid[entity.getY()][entity.getX()] = null;
+        }
+        entities.remove(entity);
+    }
+
+    public void nextTick(){
+        List<Entity> copy = new ArrayList<>(entities);
+        for(Entity e: copy){
+            if(e.isAlive() && e.getClass() == Potato.class){
+                e.tick(this);
+            }
+        }
+        for(Entity e: copy){
+            if(e.isAlive() && e.getClass() == Beetle.class){
+                e.tick(this);
+            }
+        }
+        for(Entity e: copy){
+            if(e.isAlive() && e.getClass() == Fox.class){
+                e.tick(this);
+            }
+        }
+        for(Entity e: copy){
+            if(e.isAlive() && e.getClass() == Chicken.class){
+                e.tick(this);
+            }
+        }
+        for(Entity e: copy){
+            if(e.isAlive() && e.getClass() == Farmer.class){
+                e.tick(this);
+            }
+        }
+    }
+
     public Board(int width, int height){
         this.width = width;
         this.height = height;
