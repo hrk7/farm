@@ -111,6 +111,7 @@ public class Board {
         }
         return null;
     }
+
     public void display(){
         for(int x = 0; x < width; x++){
             for(int y = 0; y < height; y++){
