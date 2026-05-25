@@ -58,6 +58,7 @@ public class Board {
                 case Beetle beetle -> chance = 69;
                 case Chicken chicken -> chance = 89;
                 case Fox fox -> chance = 99;
+                case Farmer farmer -> chance = 100;
                 default -> {
                 }
             }
@@ -72,6 +73,9 @@ public class Board {
         } else if (chance < 90){
             Chicken newChicken = new Chicken(x, y);
             addEntity(newChicken);
+        } else if (chance == 100){
+            Farmer newFarmer = new Farmer(x, y, 2);
+            addEntity(newFarmer);
         } else {
             Fox newFox = new Fox(x, y);
             addEntity(newFox);
