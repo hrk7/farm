@@ -15,6 +15,7 @@ public class simulationGUI extends JFrame {
     private Board board;
     private GridPanel gridPanel;
     private Timer timer;
+    private JLabel scoreLabel;
 
     private Image farmerImg;
     private Image foxImg;
@@ -49,10 +50,13 @@ public class simulationGUI extends JFrame {
         JButton stepButton = new JButton("Następny krok");
         JButton autoButton = new JButton("Auto-play");
 
+        scoreLabel = new JLabel("Wynik: 0");
+
         stepButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 board.nextTick();
+                scoreLabel.setText("Wynik: " + board.getScore());
                 gridPanel.repaint();
             }
         });
@@ -61,6 +65,7 @@ public class simulationGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 board.nextTick();
+                scoreLabel.setText("Wynik: " + board.getScore());
                 gridPanel.repaint();
             }
         });
@@ -82,6 +87,7 @@ public class simulationGUI extends JFrame {
 
         controlPanel.add(stepButton);
         controlPanel.add(autoButton);
+        controlPanel.add(scoreLabel);
         add(controlPanel, BorderLayout.SOUTH);
 
         pack();

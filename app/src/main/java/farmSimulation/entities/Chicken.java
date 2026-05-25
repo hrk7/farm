@@ -19,6 +19,7 @@ public class Chicken extends Entity {
         if(nearbyBeetle != null && nearbyBeetle.isAlive()){
             System.out.println("Kura zjada stonkę na pozycji (" + nearbyBeetle.getX() + "," + nearbyBeetle.getY() + ").");
             nearbyBeetle.die();
+            board.addScore(5);
             board.removeEntity(nearbyBeetle);
             board.markAction();
         } else {
@@ -28,6 +29,7 @@ public class Chicken extends Entity {
                 nearbyPotato.consume(1.5);
                 if(!nearbyPotato.isAlive()){
                     board.removeEntity(nearbyPotato);
+                    board.addScore(3);
                 }
                 board.markAction();
             }

@@ -13,6 +13,7 @@ public class Board {
     private Random random = new Random();
     private int tickCount = 0;
     private boolean actionLogged = false;
+    private int score = 0;
 
     public Board(int width, int height, int spawnRate){
         this.width = width;
@@ -41,6 +42,14 @@ public class Board {
 
     public void markAction() {
         this.actionLogged = true;
+    }
+
+    public void addScore(int points) {
+        this.score += points;
+    }
+
+    public int getScore() {
+        return this.score;
     }
 
     public void spawnRandomEntity(Entity entity){

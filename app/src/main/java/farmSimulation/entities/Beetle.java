@@ -19,6 +19,7 @@ public class Beetle extends Entity{
            nearbyPotato.consume(1.0);
            if(!nearbyPotato.isAlive()){
                board.removeEntity(nearbyPotato);
+               board.addScore(-3);
            }
            System.out.println("Stonka żeruje na ziemniaku na pozycji (" + x + "," + y + ").");
             board.markAction();
