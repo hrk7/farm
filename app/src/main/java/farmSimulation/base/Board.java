@@ -22,6 +22,9 @@ public class Board {
         if(isValid(entity.getX(), entity.getY()) && grid[entity.getY()][entity.getX()] == null){
             grid[entity.getY()][entity.getX()] = entity;
             entities.add(entity);
+            System.out.println("Dodano: " + entity.getClass().getSimpleName() + " na pozycji (" + entity.getX() + "," + entity.getY() + ").");
+        } else {
+            System.out.println("Błąd: Nie można dodać " + entity.getClass().getSimpleName() + " na (" + entity.getX() + "," + entity.getY() + "). Miejsce zajęte lub poza planszą.");
         }
     }
 
@@ -158,20 +161,6 @@ public class Board {
             }
         }
         return null;
-    }
-
-    public void display(){
-        for(int x = 0; x < width; x++){
-            for(int y = 0; y < height; y++){
-                if(grid[y][x] == null){
-                    System.out.print(". ");
-                } else {
-                    System.out.print(grid[y][x].getSymbol() + " ");
-                }
-                System.out.println();
-            }
-        }
-        System.out.println("=========");
     }
 
     public int getWidth() {
