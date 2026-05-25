@@ -56,6 +56,10 @@ public class simulationGUI extends JFrame {
         JButton stepButton = new JButton("Następny krok");
         JButton autoButton = new JButton("Auto-play");
 
+        JLabel speedLabel = new JLabel("Prędkość (mnożnik): ");
+        JTextField speedField = new JTextField("1", 3);
+        speedField.setToolTipText("Wpisz mnożnik i naciśnij Enter");
+
         stepButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -81,6 +85,7 @@ public class simulationGUI extends JFrame {
                     timer.stop();
                     autoButton.setText("Auto-play");
                     stepButton.setEnabled(true);
+                    speedField.setEnabled(true);
                 } else {
                     timer.start();
                     autoButton.setText("Stop");
@@ -89,8 +94,31 @@ public class simulationGUI extends JFrame {
             }
         });
 
+        speedField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    double multiplier = Double.parseDouble(speedField.getText().replace(',', '.'));
+
+                    if (multiplier <= 0) {
+                        multiplier = 1.0;
+                        speedField.setText("1");
+                    }
+
+                    int newDelay = (int) (500 / multiplier);
+                    timer.setDelay(Math.max(1, newDelay));
+
+                } catch (NumberFormatException ex) {
+                    speedField.setText("1");
+                    timer.setDelay(500);
+                }
+            }
+        });
+
         controlPanel.add(stepButton);
         controlPanel.add(autoButton);
+        controlPanel.add(speedLabel);
+        controlPanel.add(speedField);
         add(controlPanel, BorderLayout.SOUTH);
 
         pack();
