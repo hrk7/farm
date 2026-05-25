@@ -7,16 +7,36 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 
 public class simulationGUI extends JFrame {
     private Board board;
     private GridPanel gridPanel;
     private Timer timer;
 
+    private Image farmerImg;
+    private Image foxImg;
+    private Image chickenImg;
+    private Image beetleImg;
+    private Image potatoImg;
+
     public simulationGUI(Board board) {
         this.board = board;
 
-        setTitle("simulation v2");
+        try {
+            farmerImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/farmer.png"));
+            foxImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/fox.png"));
+            chickenImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/chicken.png"));
+            beetleImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/beetle.png"));
+            potatoImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/potato.png"));
+        } catch (IOException e) {
+            System.out.println("Błąd ładowania obrazków.");
+            e.printStackTrace();
+        }
+
+        setTitle("simulation v1");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -97,19 +117,23 @@ public class simulationGUI extends JFrame {
         }
 
         private void drawEntity(Graphics g, Entity entity, int px, int py) {
-            if (entity instanceof Farmer) g.setColor(Color.BLUE);
-            else if (entity instanceof Fox) g.setColor(Color.RED);
-            else if (entity instanceof Chicken) g.setColor(Color.WHITE);
-            else if (entity instanceof Beetle) g.setColor(Color.BLACK);
-            else if (entity instanceof Potato) g.setColor(new Color(139, 69, 19));
+            Image imgToDraw = null;
 
-            g.fillOval(px + 5, py + 5, CELL_SIZE - 10, CELL_SIZE - 10);
+            if (entity instanceof Farmer) {
+                imgToDraw = farmerImg;
+            } else if (entity instanceof Fox) {
+                imgToDraw = foxImg;
+            } else if (entity instanceof Chicken) {
+                imgToDraw = chickenImg;
+            } else if (entity instanceof Beetle) {
+                imgToDraw = beetleImg;
+            } else if (entity instanceof Potato) {
+                imgToDraw = potatoImg;
+            }
 
-            g.setColor(Color.WHITE);
-            if (entity instanceof Chicken) g.setColor(Color.BLACK);
-
-            g.setFont(new Font("Arial", Font.BOLD, 20));
-            g.drawString(String.valueOf(entity.getSymbol()), px + CELL_SIZE / 2 - 8, py + CELL_SIZE / 2 + 8);
+            if (imgToDraw != null) {
+                g.drawImage(imgToDraw, px, py, CELL_SIZE, CELL_SIZE, null);
+            }
         }
     }
 }
