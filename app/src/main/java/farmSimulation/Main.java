@@ -14,7 +14,7 @@ public class Main {
         board.addEntity(new Beetle(2, 3));
         board.addEntity(new Chicken(3, 3));
         board.addEntity(new Fox(7, 7));
-        board.addEntity(new Farmer(5, 4, 2.0));
+        board.addEntity(new Farmer(5, 4, 2));
 
         SwingUtilities.invokeLater(() -> {
             simulationGUI gui = new simulationGUI(board);

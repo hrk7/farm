@@ -4,10 +4,10 @@ import farmSimulation.base.Board;
 import java.util.Random;
 
 public class Farmer extends Entity {
-    private double protectionRadius;
+    private int protectionRadius;
     private Random random = new Random();
 
-    public Farmer(int x, int y, double protectionRadius) {
+    public Farmer(int x, int y, int protectionRadius) {
         super(x, y);
         this.protectionRadius = protectionRadius;
     }
@@ -30,7 +30,7 @@ public class Farmer extends Entity {
             System.out.println("Farmer zbiera ziemniaka na pozycji (" + targetX + "," + targetY + ").");
         }
 
-        Beetle nearbyBeetle = board.findBeetleNearby(x, y, 2);
+        Beetle nearbyBeetle = board.findBeetleNearby(x, y, protectionRadius);
         if (nearbyBeetle != null && nearbyBeetle.isAlive()) {
             int targetX = nearbyBeetle.getX();
             int targetY = nearbyBeetle.getY();
@@ -40,7 +40,7 @@ public class Farmer extends Entity {
             System.out.println("Farmer zabija stonkę na pozycji (" + targetX + "," + targetY + ").");
         }
 
-        Fox nearbyFox = board.findFoxNearby(x, y, 2);
+        Fox nearbyFox = board.findFoxNearby(x, y, protectionRadius);
         if(nearbyFox != null && nearbyFox.isAlive()){
             int targetX = nearbyFox.getX();
             int targetY = nearbyFox.getY();
