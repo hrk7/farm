@@ -7,15 +7,17 @@ import java.util.Random;
 public class Board {
     private int width;
     private int height;
+    private int spawnRate;
     private Entity[][] grid;
     private List<Entity> entities;
     private Random random = new Random();
     private int tickCount = 0;
     private boolean actionLogged = false;
 
-    public Board(int width, int height){
+    public Board(int width, int height, int spawnRate){
         this.width = width;
         this.height = height;
+        this.spawnRate = spawnRate;
         this.grid = new Entity[height][width];
         this.entities = new ArrayList<>();
     }
@@ -102,6 +104,11 @@ public class Board {
 
     public void nextTick(){
         tickCount++;
+
+        if(tickCount % spawnRate == 0){
+            spawnRandomEntity(null);
+        }
+
         actionLogged = false;
         System.out.println("\n === TURA " + tickCount + " ===");
 
