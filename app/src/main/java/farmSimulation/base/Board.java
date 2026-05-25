@@ -41,7 +41,7 @@ public class Board {
         this.actionLogged = true;
     }
 
-    public void spawnRandomEntity(){
+    public void spawnRandomEntity(Entity entity){
         int[] freePosition = findRandomFreePosition();
         if (freePosition == null){
             System.out.println("Brak wolnego miejsca na planszy na nowy obiekt");
@@ -50,23 +50,31 @@ public class Board {
         int x = freePosition[0];
         int y = freePosition[1];
 
-        int chance = random.nextInt(100);
+        int chance = random.nextInt(99);
+
+        if(entity != null) {
+            switch (entity) {
+                case Potato potato -> chance = 39;
+                case Beetle beetle -> chance = 69;
+                case Chicken chicken -> chance = 89;
+                case Fox fox -> chance = 99;
+                default -> {
+                }
+            }
+        }
+
         if(chance < 40){
             Potato newPotato = new Potato(x, y, 1.0);
             addEntity(newPotato);
-            System.out.println("Na polu (" + x + "," + y + ") pojawił sie ziemniak!");
         } else if (chance < 70){
             Beetle newBeetle = new Beetle(x, y);
             addEntity(newBeetle);
-            System.out.println("Na polu (" + x + "," + y + ") pojawiła sie stonka!");
         } else if (chance < 90){
             Chicken newChicken = new Chicken(x, y);
             addEntity(newChicken);
-            System.out.println("Na polu (" + x + "," + y + ") pojawiła sie kura!");
         } else {
             Fox newFox = new Fox(x, y);
             addEntity(newFox);
-            System.out.println("Na polu (" + x + "," + y + ") pojawił sie lis!");
         }
     }
 
