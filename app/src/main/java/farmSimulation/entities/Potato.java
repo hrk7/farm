@@ -20,7 +20,10 @@ public class Potato extends Entity{
 
     public void consume(double amount){
         this.mass = Math.max(0, this.mass - amount);
+        System.out.println("Ziemniak na (" + x + "," + y + ") traci masę. Zostało: " + String.format("%.1f", this.mass));
+
         if(this.mass <= 0){
+            System.out.println("Ziemniak na (" + x + "," + y + ") został całkowicie zjedzony!");
             die();
         }
     }
