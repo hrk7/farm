@@ -28,6 +28,7 @@ public class Farmer extends Entity {
             harvest(nearbyPotato);
             board.removeEntity(nearbyPotato);
             System.out.println("Farmer zbiera ziemniaka na pozycji (" + targetX + "," + targetY + ").");
+            board.markAction();
         }
 
         Beetle nearbyBeetle = board.findBeetleNearby(x, y, 2);
@@ -38,6 +39,7 @@ public class Farmer extends Entity {
             nearbyBeetle.die();
             board.removeEntity(nearbyBeetle);
             System.out.println("Farmer zabija stonkę na pozycji (" + targetX + "," + targetY + ").");
+            board.markAction();
         }
 
         Fox nearbyFox = board.findFoxNearby(x, y, 2);
@@ -48,6 +50,7 @@ public class Farmer extends Entity {
             nearbyFox.die();
             board.removeEntity(nearbyFox);
             System.out.println("Farmer zabija lisa na pozycji (" + targetX + "," + targetY + ").");
+            board.markAction();
         }
     }
 

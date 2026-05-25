@@ -10,6 +10,8 @@ public class Board {
     private Entity[][] grid;
     private List<Entity> entities;
     private Random random = new Random();
+    private int tickCount = 0;
+    private boolean actionLogged = false;
 
     public Board(int width, int height){
         this.width = width;
@@ -33,6 +35,10 @@ public class Board {
             grid[entity.getY()][entity.getX()] = null;
         }
         entities.remove(entity);
+    }
+
+    public void markAction() {
+        this.actionLogged = true;
     }
 
     public void spawnRandomEntity(){
@@ -83,6 +89,10 @@ public class Board {
     }
 
     public void nextTick(){
+        tickCount++;
+        actionLogged = false;
+        System.out.println("\n === TURA " + tickCount + " ===");
+
         List<Entity> copy = new ArrayList<>(entities);
         for(Entity e: copy){
             if(e.isAlive() && e.getClass() == Potato.class){
@@ -108,6 +118,10 @@ public class Board {
             if(e.isAlive() && e.getClass() == Farmer.class){
                 e.tick(this);
             }
+        }
+
+        if (!actionLogged) {
+            System.out.println("Tylko ruch na planszy, brak specjalnych interakcji.");
         }
     }
 

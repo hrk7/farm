@@ -21,6 +21,7 @@ public class Beetle extends Entity{
                board.removeEntity(nearbyPotato);
            }
            System.out.println("Stonka żeruje na ziemniaku na pozycji (" + x + "," + y + ").");
+            board.markAction();
         } else {
            int newX = x + random.nextInt(3) - 1;
            int newY = y + random.nextInt(3) - 1;
