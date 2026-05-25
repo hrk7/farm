@@ -43,14 +43,18 @@ public class simulationGUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        scoreLabel = new JLabel("Wynik: 0");
+        scoreLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        topPanel.add(scoreLabel);
+        add(topPanel, BorderLayout.NORTH);
+
         gridPanel = new GridPanel();
         add(gridPanel, BorderLayout.CENTER);
 
         JPanel controlPanel = new JPanel();
         JButton stepButton = new JButton("Następny krok");
         JButton autoButton = new JButton("Auto-play");
-
-        scoreLabel = new JLabel("Wynik: 0");
 
         stepButton.addActionListener(new ActionListener() {
             @Override
@@ -87,7 +91,6 @@ public class simulationGUI extends JFrame {
 
         controlPanel.add(stepButton);
         controlPanel.add(autoButton);
-        controlPanel.add(scoreLabel);
         add(controlPanel, BorderLayout.SOUTH);
 
         pack();
