@@ -28,8 +28,8 @@ public class Chicken extends Entity {
                 nearbyPotato.consume(1.5);
                 if(!nearbyPotato.isAlive()){
                     board.removeEntity(nearbyPotato);
-                    board.markAction();
                 }
+                board.markAction();
             }
             else {
                 int newX = x + random.nextInt(3) - 1;
