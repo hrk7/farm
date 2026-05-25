@@ -1,7 +1,6 @@
 package farmSimulation.entities;
 
 import farmSimulation.base.Board;
-
 import java.util.Random;
 
 public class Fox extends Entity {
@@ -24,9 +23,12 @@ public class Fox extends Entity {
         Chicken targetChicken = board.findChickenNearby(x, y, 1);
 
         if (targetChicken != null && targetChicken.isAlive()) {
+            int targetX = targetChicken.getX();
+            int targetY = targetChicken.getY();
+
             hunt(targetChicken);
             board.removeEntity(targetChicken);
-            System.out.println("Lis zabija kurczaka na pozycji (" + x + "," + y + ").");
+            System.out.println("Lis zabija kurczaka na pozycji (" + targetX + "," + targetY + ").");
         } else {
             int newX = x + random.nextInt(5) - 2;
             int newY = y + random.nextInt(5) - 2;
