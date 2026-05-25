@@ -1,14 +1,22 @@
 package farmSimulation.base;
 import farmSimulation.entities.*;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Board {
     private int width;
     private int height;
     private Entity[][] grid;
     private List<Entity> entities;
+    private Random random = new Random();
+
+    public Board(int width, int height){
+        this.width = width;
+        this.height = height;
+        this.grid = new Entity[height][width];
+        this.entities = new ArrayList<>();
+    }
 
     public void addEntity(Entity entity){
         if(isValid(entity.getX(), entity.getY()) && grid[entity.getY()][entity.getX()] == null){
@@ -22,6 +30,53 @@ public class Board {
             grid[entity.getY()][entity.getX()] = null;
         }
         entities.remove(entity);
+    }
+
+    public void spawnRandomEntity(){
+        int[] freePosition = findRandomFreePosition();
+        if (freePosition == null){
+            System.out.println("Brak wolnego miejsca na planszy na nowy obiekt");
+            return;
+        }
+        int x = freePosition[0];
+        int y = freePosition[1];
+
+        int chance = random.nextInt(100);
+        if(chance < 40){
+            Potato newPotato = new Potato(x, y, 1.0);
+            addEntity(newPotato);
+            System.out.println("Na polu (" + x + "," + y + ") pojawił sie ziemniak!");
+        } else if (chance < 70){
+            Beetle newBeetle = new Beetle(x, y);
+            addEntity(newBeetle);
+            System.out.println("Na polu (" + x + "," + y + ") pojawiła sie stonka!");
+        } else if (chance < 90){
+            Chicken newChicken = new Chicken(x, y);
+            addEntity(newChicken);
+            System.out.println("Na polu (" + x + "," + y + ") pojawiła sie kura!");
+        } else {
+            Fox newFox = new Fox(x, y);
+            addEntity(newFox);
+            System.out.println("Na polu (" + x + "," + y + ") pojawił sie lis!");
+        }
+    }
+
+    private int[] findRandomFreePosition(){
+        for(int i = 0; i < 100; i++){
+            int rx = random.nextInt(width);
+            int ry = random.nextInt(height);
+            if(grid[ry][rx] == null){
+                return new int[]{rx, ry};
+            }
+        }
+        for(int y = 0; y < height; y++){
+            for(int x = 0; x < width; x++){
+                if(grid[y][x] == null){
+                    return new int[]{x, y};
+                }
+            }
+        }
+        return null;
     }
 
     public void nextTick(){
@@ -51,13 +106,6 @@ public class Board {
                 e.tick(this);
             }
         }
-    }
-
-    public Board(int width, int height){
-        this.width = width;
-        this.height = height;
-        this.grid = new Entity[height][width];
-        this.entities = new ArrayList<>();
     }
 
     public void moveEntity(Entity entity, int newX, int newY){
