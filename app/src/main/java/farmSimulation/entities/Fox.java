@@ -28,6 +28,7 @@ public class Fox extends Entity {
 
             hunt(targetChicken);
             board.removeEntity(targetChicken);
+            board.addScore(-20);
             System.out.println("Lis zabija kurczaka na pozycji (" + targetX + "," + targetY + ").");
             board.markAction();
         } else {

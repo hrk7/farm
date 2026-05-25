@@ -38,6 +38,7 @@ public class Farmer extends Entity {
             int targetX = nearbyBeetle.getX();
             int targetY = nearbyBeetle.getY();
 
+            board.addScore(1);
             nearbyBeetle.die();
             board.removeEntity(nearbyBeetle);
             System.out.println("Farmer zabija stonkę na pozycji (" + targetX + "," + targetY + ").");
