@@ -59,13 +59,30 @@ public class Board {
         this.grid = new Entity[height][width];
         this.entities = new ArrayList<>();
     }
+
     public void moveEntity(Entity entity, int newX, int newY){
-        if(isValid(newX, newY) && grid[newX][newY] == null){
-            grid[entity.getX()][entity.getY()] = null;
-            entity.setPosition(newX, newY);
-            grid[newX][newY] = entity;
+        int dx = newX - entity.getX();
+        int dy = newY - entity.getY();
+
+        int targetX = newX;
+        int targetY = newY;
+
+        if (targetX < 0 || targetX >= width) {
+            targetX = entity.getX() - dx;
+        }
+        if (targetY < 0 || targetY >= height) {
+            targetY = entity.getY() - dy;
+        }
+
+        if(isValid(targetX, targetY) && grid[targetY][targetX] == null){
+            grid[entity.getY()][entity.getX()] = null;
+
+            entity.setPosition(targetX, targetY);
+
+            grid[targetY][targetX] = entity;
         }
     }
+
     private boolean isValid(int x, int y){
         return  x >= 0 && x < width && y >= 0 && y < height;
     }
