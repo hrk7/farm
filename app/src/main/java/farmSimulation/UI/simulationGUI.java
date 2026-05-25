@@ -39,7 +39,7 @@ public class simulationGUI extends JFrame {
             e.printStackTrace();
         }
 
-        setTitle("simulation v1");
+        setTitle("simulation v2");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
