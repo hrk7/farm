@@ -21,6 +21,7 @@ public class simulationGUI extends JFrame {
     private Image chickenImg;
     private Image beetleImg;
     private Image potatoImg;
+    private Image potatoBigImg;
 
     public simulationGUI(Board board) {
         this.board = board;
@@ -31,6 +32,7 @@ public class simulationGUI extends JFrame {
             chickenImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/chicken.png"));
             beetleImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/beetle.png"));
             potatoImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/potato.png"));
+            potatoBigImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/potatoBig.png"));
         } catch (IOException e) {
             System.out.println("Błąd ładowania obrazków.");
             e.printStackTrace();
@@ -128,7 +130,12 @@ public class simulationGUI extends JFrame {
             } else if (entity instanceof Beetle) {
                 imgToDraw = beetleImg;
             } else if (entity instanceof Potato) {
-                imgToDraw = potatoImg;
+                Potato p = (Potato) entity;
+                if (p.getMass() >= 5.0) {
+                    imgToDraw = potatoBigImg;
+                } else {
+                    imgToDraw = potatoImg;
+                }
             }
 
             if (imgToDraw != null) {
