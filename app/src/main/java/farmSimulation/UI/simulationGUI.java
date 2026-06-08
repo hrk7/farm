@@ -28,12 +28,12 @@ public class simulationGUI extends JFrame {
         this.board = board;
 
         try {
-            farmerImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/farmer.png"));
-            foxImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/fox.png"));
-            chickenImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/chicken.png"));
-            beetleImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/beetle.png"));
-            potatoImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/potato.png"));
-            potatoBigImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/potatoBig.png"));
+            farmerImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/farmer_new.png"));
+            foxImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/fox_new.png"));
+            chickenImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/chicken_new.png"));
+            beetleImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/beetle_new.png"));
+            potatoImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/potato_new.png"));
+            potatoBigImg = ImageIO.read(new File("app/src/main/java/farmSimulation/images/potatoBig_new.png"));
         } catch (IOException e) {
             System.out.println("Błąd ładowania obrazków.");
             e.printStackTrace();

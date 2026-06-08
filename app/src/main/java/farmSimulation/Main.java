@@ -10,10 +10,10 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         Map<String, Integer> spawnConfig = new HashMap<>();
-        spawnConfig.put("potatoes", 0);
-        spawnConfig.put("beetles", 0);
-        spawnConfig.put("chickens", 0);
-        spawnConfig.put("foxes", 0);
+        spawnConfig.put("potatoes", 1);
+        spawnConfig.put("beetles", 1);
+        spawnConfig.put("chickens", 1);
+        spawnConfig.put("foxes", 1);
         spawnConfig.put("farmers", 1);
 
         Board board = new Board(10, 10, 4);
