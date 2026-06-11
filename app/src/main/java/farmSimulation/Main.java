@@ -10,7 +10,7 @@ import java.util.Map; // Importowanie interfejsu Map do obsługi struktur klucz-
 /**
  * Główna klasa uruchomieniowa aplikacji (Punkt wejścia).
  * Inicjuje parametry startowe ekosystemu, konfiguruje planszę
- * oraz uruchamia interfejs graficzny w bezpiecznym wątku (EDT).
+ * oraz uruchamia interfejs graficzny w bezpiecznym wątku.
  */
 public class Main { // Definicja głównej klasy Main uruchamiającej całą aplikację
     public static void main(String[] args) { // Główna metoda startowa programu
