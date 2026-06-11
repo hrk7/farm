@@ -3,16 +3,31 @@ package farmSimulation.entities; // Definicja pakietu, w którym znajdują się 
 import farmSimulation.base.Board; // Importowanie klasy Board z pakietu bazowego do obsługi planszy
 import java.util.Random; // Importowanie klasy Random służącej do generowania liczb losowych
 
+/**
+ * Klasa reprezentująca rolnika. Główna jednostka sterowana algorytmicznie,
+ * odpowiedzialna za zbieranie plonów oraz eliminację szkodników i drapieżników.
+ */
 public class Farmer extends Entity { // Definicja publicznej klasy Farmer dziedziczącej po klasie bazowej Entity
     private int protectionRadius; // Prywatne pole określające promień ochrony, w którym farmer zwalcza szkodniki
     private int visionRadius = 3; // Prywatne pole określające promień wzroku farmera (zasięg szukania ziemniaków)
     private Random random = new Random(); // Inicjalizacja prywatnego generatora liczb losowych
 
+    /**
+     * Konstruktor klasy Farmer.
+     * * @param x Początkowa współrzędna X.
+     * @param y Początkowa współrzędna Y.
+     * @param protectionRadius Promień, w którym farmer automatycznie niszczy zagrożenia (lisy, stonki).
+     */
     public Farmer(int x, int y, int protectionRadius) { // Konstruktor klasy Farmer przyjmujący współrzędne oraz promień ochrony
         super(x, y); // Wywołanie konstruktora klasy nadrzędnej (Entity) w celu ustawienia pozycji farmera
         this.protectionRadius = protectionRadius; // Przypisanie przekazanego promienia ochrony do pola klasy
     }
 
+    /**
+     * Implementacja tury rolnika: szukanie najbliższego ziemniaka, przemieszczanie się,
+     * zbieranie dojrzałych plonów oraz zwalczanie szkodników w strefie ochrony.
+     * * @param board Referencja do głównej planszy.
+     */
     @Override // Nadpisanie metody z klasy bazowej Entity
     public void tick(Board board) { // Metoda obsługująca logikę zachowania farmera w danej turze
         if (!isAlive()) return; // Jeśli farmer nie żyje, przerwij wykonywanie tury
@@ -94,6 +109,10 @@ public class Farmer extends Entity { // Definicja publicznej klasy Farmer dziedz
         return closest; // Zwrot referencji do najbliższego dojrzałego ziemniaka lub null, jeśli nic nie znaleziono
     }
 
+    /**
+     * Przeprowadza zbiór ziemniaka, konsumując całą jego masę.
+     * * @param potato Obiekt dojrzałego ziemniaka przeznaczony do zebrania.
+     */
     public void harvest(Potato potato) { // Publiczna metoda realizująca proces zbioru ziemniaka
         double harvestedMass = potato.getMass(); // Pobranie aktualnej masy ziemniaka przeznaczonego do zbioru
         potato.consume(harvestedMass); // Zredukowanie masy ziemniaka do zera poprzez skonsumowanie całej jego masy

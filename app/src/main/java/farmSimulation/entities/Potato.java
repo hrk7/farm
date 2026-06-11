@@ -2,15 +2,30 @@ package farmSimulation.entities; // Definicja pakietu, w którym znajdują się 
 
 import farmSimulation.base.Board; // Importowanie klasy Board z pakietu bazowego do obsługi planszy
 
+/**
+ * Klasa reprezentująca ziemniaka (uprawę). Pasywny obiekt, który stopniowo
+ * zwiększa swoją masę w czasie, dopóki nie zostanie zebrany lub zjedzony.
+ */
 public class Potato extends Entity{ // Definicja publicznej klasy Potato dziedziczącej po klasie bazowej Entity
     private double mass; // Prywatne pole przechowujące aktualną masę ziemniaka
     private final double growthRate = 0.5; // Stałe, prywatne pole określające przyrost masy ziemniaka w każdej turze
 
+    /**
+     * Konstruktor inicjujący ziemniaka.
+     * * @param x Współrzędna X.
+     * @param y Współrzędna Y.
+     * @param initialMass Początkowa masa plonu (domyślnie zaczyna od niewielkiej wartości).
+     */
     public Potato(int x, int y, double initialMass){ // Konstruktor klasy Potato przyjmujący pozycję oraz masę początkową
         super(x, y); // Wywołanie konstruktora klasy nadrzędnej (Entity) w celu ustawienia współrzędnych
         this.mass = initialMass; // Przypisanie przekazanej masy początkowej do pola klasy
     }
 
+    /**
+     * Implementacja tury ziemniaka: naturalny przyrost masy co turę,
+     * aż do osiągnięcia pełnej dojrzałości (masa 5.0).
+     * * @param board Referencja do planszy.
+     */
     @Override // Nadpisuje metody z klasy bazowej Entity
     public void tick(Board board){ // Metoda obsługująca logikę zachowania ziemniaka w danej turze
         if(mass > 0 && mass < 5.0){ // Jeśli ziemniak istnieje (mass > 0) i jeszcze nie w pełni dojrzał (mass < 5.0)
@@ -18,6 +33,11 @@ public class Potato extends Entity{ // Definicja publicznej klasy Potato dziedzi
         }
     }
 
+    /**
+     * Zmniejsza masę ziemniaka w wyniku żerowania (np. przez stonki lub kurczaki).
+     * Jeśli masa spadnie do zera, ziemniak obumiera.
+     * * @param amount Wartość, o którą ma zostać zmniejszona masa.
+     */
     public void consume(double amount){ // Publiczna metoda obsługująca podjadanie masy ziemniaka
         this.mass = Math.max(0, this.mass - amount); // Zmniejszenie masy o podaną wartość, zabezpieczone przed spadkiem poniżej 0
         System.out.println("Ziemniak na (" + x + "," + y + ") traci masę. Zostało: " + String.format("%.1f", this.mass)); // Wypisanie informacji o aktualnym stanie masy

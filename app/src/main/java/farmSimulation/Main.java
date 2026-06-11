@@ -7,6 +7,11 @@ import javax.swing.SwingUtilities; // Importowanie klasy SwingUtilities służą
 import java.util.HashMap; // Importowanie klasy HashMap do implementacji mapy konfiguracyjnej
 import java.util.Map; // Importowanie interfejsu Map do obsługi struktur klucz-wartość
 
+/**
+ * Główna klasa uruchomieniowa aplikacji (Punkt wejścia).
+ * Inicjuje parametry startowe ekosystemu, konfiguruje planszę
+ * oraz uruchamia interfejs graficzny w bezpiecznym wątku (EDT).
+ */
 public class Main { // Definicja głównej klasy Main uruchamiającej całą aplikację
     public static void main(String[] args) { // Główna metoda startowa programu
         Map<String, Integer> spawnConfig = new HashMap<>(); // Utworzenie mapy przechowującej początkową liczbę obiektów poszczególnych typów

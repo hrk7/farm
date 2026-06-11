@@ -3,6 +3,10 @@ import farmSimulation.base.Board; // Importowanie klasy Board z pakietu bazowego
 
 import java.util.Random; // Importowanie klasy Random służącej do generowania liczb losowych
 
+/**
+ * Klasa reprezentująca stonkę. Szkodnik rolniczy, który żeruje na plonach
+ * i doprowadza do niszczenia ziemniaków.
+ */
 public class Beetle extends Entity{ // Definicja publicznej klasy Beetle dziedziczącej po klasie bazowej Entity
     private Random random = new Random(); // Inicjalizacja prywatnego generatora liczb losowych dla każdej stonki
 
@@ -10,6 +14,11 @@ public class Beetle extends Entity{ // Definicja publicznej klasy Beetle dziedzi
         super(x, y); // Wywołanie konstruktora klasy nadrzędnej (Entity) w celu ustawienia pozycji
     }
 
+    /**
+     * Implementacja tury stonki: niszczenie sąsiadujących ziemniaków
+     * poprzez redukcję ich masy lub losowy ruch po planszy.
+     * * @param board Referencja do głównej planszy.
+     */
     @Override // Nadpisanie metody z klasy bazowej Entity
     public void tick(Board board){ // Metoda obsługująca logikę zachowania stonki w danej turze
         if(!isAlive()) return; // Jeśli stonka nie żyje, przerwij wykonywanie tury

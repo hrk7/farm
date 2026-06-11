@@ -4,6 +4,10 @@ import farmSimulation.base.Board; // Importowanie klasy Board z pakietu bazowego
 
 import java.util.Random; // Importowanie klasy Random służącej do generowania liczb losowych
 
+/**
+ * Klasa reprezentująca kurczaka. Zwierzę hodowlane o podwójnej naturze:
+ * zjada szkodniki (stonki), ale w przypadku ich braku podjada uprawy (ziemniaki).
+ */
 public class Chicken extends Entity { // Definicja publicznej klasy Chicken dziedziczącej po klasie bazowej Entity
     private Random random = new Random(); // Inicjalizacja prywatnego generatora liczb losowych
 
@@ -11,6 +15,11 @@ public class Chicken extends Entity { // Definicja publicznej klasy Chicken dzie
         super(x, y); // Wywołanie konstruktora klasy nadrzędnej (Entity) w celu ustawienia pozycji
     }
 
+    /**
+     * Implementacja tury kurczaka: priorytetowe zjadanie stonek,
+     * w ostateczności jedzenie ziemniaków lub losowy ruch.
+     * * @param board Referencja do głównej planszy.
+     */
     @Override // Nadpisanie metody z klasy bazowej Entity
     public void tick(Board board) { // Metoda obsługująca logikę zachowania kurczaka w danej turze
         if (!isAlive()) return; // Jeśli kurczak nie żyje, przerwij wykonywanie tury

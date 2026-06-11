@@ -4,6 +4,10 @@ import java.util.ArrayList; // Importowanie klasy ArrayList do dynamicznej listy
 import java.util.List; // Importowanie interfejsu List do obsługi kolekcji
 import java.util.Random; // Importowanie klasy Random do generowania liczb losowych
 
+/**
+ * Klasa pełniąca rolę silnika symulacji. Zarządza siatką obiektów,
+ * logiką upływu czasu (turami), systemem punktacji i dynamicznym spawnowaniem.
+ */
 public class Board { // Definicja publicznej klasy Board
     private int width; // Pole przechowujące szerokość planszy
     private int height; // Pole przechowujące wysokość planszy
@@ -15,6 +19,12 @@ public class Board { // Definicja publicznej klasy Board
     private boolean actionLogged = false; // Flaga sprawdzająca, czy w danej turze doszło do ważnej akcji
     private int score = 0; // Pole przechowujące aktualny wynik punktowy
 
+    /**
+     * Tworzy nową planszę symulacji.
+     * * @param width Szerokość planszy (liczba kolumn).
+     * @param height Wysokość planszy (liczba wierszy).
+     * @param spawnRate Częstotliwość (w turach) pojawiania się nowych obiektów.
+     */
     public Board(int width, int height, int spawnRate){ // Konstruktor klasy Board przyjmujący wymiary i częstotliwość pojawiania się jednostek
         this.width = width; // Przypisanie szerokości planszy z parametru do pola klasy
         this.height = height; // Przypisanie wysokości planszy z parametru do pola klasy
@@ -23,6 +33,10 @@ public class Board { // Definicja publicznej klasy Board
         this.entities = new ArrayList<>(); // Inicjalizacja pustej listy na obiekty gry
     }
 
+    /**
+     * Dodaje nową jednostkę na planszę, jeśli podane współrzędne są wolne i prawidłowe.
+     * * @param entity Obiekt jednostki do dodania.
+     */
     public void addEntity(Entity entity){ // Metoda dodająca nową jednostkę na planszę
         if(isValid(entity.getX(), entity.getY()) && grid[entity.getY()][entity.getX()] == null){ // Sprawdzenie, czy pozycja jest poprawna i pusta
             grid[entity.getY()][entity.getX()] = entity; // Umieszczenie jednostki na planszy
@@ -52,6 +66,10 @@ public class Board { // Definicja publicznej klasy Board
         return this.score; // Zwrócenie wartości pola score
     }
 
+    /**
+     * Generuje nowy, losowy obiekt na planszy w oparciu o wbudowane prawdopodobieństwa.
+     * * @param entity Opcjonalny szablon obiektu (wymusza spawn konkretnego typu, jeśli nie jest null).
+     */
     public void spawnRandomEntity(Entity entity){ // Metoda losująca i tworząca nowy obiekt na planszy
         int[] freePosition = findRandomFreePosition(); // Próba znalezienia wolnego miejsca na planszy
         if (freePosition == null){ // Sprawdzenie, czy nie ma już żadnego wolnego miejsca
@@ -111,6 +129,10 @@ public class Board { // Definicja publicznej klasy Board
         return null; // Zwrócenie null, jeśli cała plansza jest całkowicie zapełniona
     }
 
+    /**
+     * Główna metoda odpowiedzialna za przejście symulacji do następnej tury.
+     * Inicjuje ruchy wszystkich jednostek w określonej kolejności fazowej.
+     */
     public void nextTick(){ // Metoda obsługująca logikę przejścia do kolejnej tury symulacji
         tickCount++; // Inkremacja (zwiększenie o 1) licznika tur
 
@@ -153,6 +175,13 @@ public class Board { // Definicja publicznej klasy Board
         }
     }
 
+    /**
+     * Przenosi jednostkę na nowe współrzędne, obsługując jednocześnie
+     * kolizje z krawędziami planszy (odbicie lustrzane).
+     * * @param entity Jednostka, która ma zostać przesunięta.
+     * @param newX Docelowa współrzędna X.
+     * @param newY Docelowa współrzędna Y.
+     */
     public void moveEntity(Entity entity, int newX, int newY){ // Metoda przemieszczająca obiekt na nowe współrzędne
         int dx = newX - entity.getX(); // Obliczenie przesunięcia (delty) na osi X
         int dy = newY - entity.getY(); // Obliczenie przesunięcia (delty) na osi Y
@@ -196,6 +225,14 @@ public class Board { // Definicja publicznej klasy Board
         return (Fox) findTypeNearby(cx, cy, Fox.class, r); // Rzutowanie wyniku ogólnego wyszukiwania na klasę Fox
     }
 
+    /**
+     * Wyszukuje najbliższy obiekt określonego typu w zadanym promieniu od punktu centralnego.
+     * * @param cx Współrzędna X środka poszukiwań.
+     * @param cy Współrzędna Y środka poszukiwań.
+     * @param type Klasa poszukiwanego obiektu (np. Potato.class).
+     * @param range Promień poszukiwań (w kratkach).
+     * @return Znaleziony obiekt lub null, jeśli nic nie znaleziono.
+     */
     private Entity findTypeNearby(int cx, int cy, Class<?> type, int range) { // Prywatna, ogólna metoda skanująca otoczenie w poszukiwaniu danego typu klasy
         for (int dx = -range; dx <= range; dx++) { // Pętla iterująca po relatywnym przesunięciu X w zasięgu ramki pola
             for (int dy = -range; dy <= range; dy++) { // Pętla iterująca po relatywnym przesunięciu Y w zasięgu ramki pola

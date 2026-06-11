@@ -3,6 +3,10 @@ package farmSimulation.entities; // Definicja pakietu, w którym znajdują się 
 import farmSimulation.base.Board; // Importowanie klasy Board z pakietu bazowego do obsługi planszy
 import java.util.Random; // Importowanie klasy Random służącej do generowania liczb losowych
 
+/**
+ * Klasa reprezentująca lisa. Drapieżnik, który aktywnie poluje na kurczaki,
+ * przynosząc straty w ekosystemie farmy.
+ */
 public class Fox extends Entity { // Definicja publicznej klasy Fox dziedziczącej po klasie bazowej Entity
     private Random random = new Random(); // Inicjalizacja prywatnego generatora liczb losowych
 
@@ -10,12 +14,20 @@ public class Fox extends Entity { // Definicja publicznej klasy Fox dziedzicząc
         super(x, y); // Wywołanie konstruktora klasy nadrzędnej (Entity) w celu ustawienia pozycji
     }
 
+    /**
+     * Metoda realizująca atak na kurczaka. Uśmierca cel.
+     * * @param chicken Referencja do obiektu kurczaka, który ma zostać upolowany.
+     */
     public void hunt(Chicken chicken) { // Publiczna metoda realizująca polowanie na kurczaka
         if (chicken != null && chicken.isAlive()) { // Sprawdzenie, czy przekazany obiekt kurczaka istnieje i żyje
             chicken.die(); // Wywołanie metody powodującej śmierć kurczaka
         }
     }
 
+    /**
+     * Implementacja tury lisa: poszukiwanie kurczaków w sąsiedztwie lub losowe przemieszczanie się.
+     * * @param board Referencja do głównej planszy.
+     */
     @Override // Nadpisanie metody z klasy bazowej Entity
     public void tick(Board board) { // Metoda obsługująca logikę zachowania lisa w danej turze
         if (!isAlive()) return; // Jeśli lis nie żyje, przerwij wykonywanie tury

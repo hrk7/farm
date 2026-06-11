@@ -11,6 +11,11 @@ import javax.imageio.ImageIO; // Importowanie klasy ImageIO służącej do wczyt
 import java.io.File; // Importowanie klasy File do reprezentacji ścieżek plików w systemie
 import java.io.IOException; // Importowanie klasy wyjątku IOException obsługującej błędy wejścia/wyjścia (np. brak pliku)
 
+/**
+ * Główna klasa interfejsu graficznego (GUI) symulacji oparta na bibliotece Swing.
+ * Odpowiada za renderowanie siatki obiektów za pomocą zewnętrznych tekstur,
+ * wyświetlanie punktacji oraz obsługę panelu kontrolnego (prędkość, autoplay).
+ */
 public class simulationGUI extends JFrame { // Definicja publicznej klasy okna GUI dziedziczącej po standardowym JFrame
     private Board board; // Prywatne pole przechowujące referencję do zarządzanej planszy symulacji
     private GridPanel gridPanel; // Prywatne pole przechowujące panel graficzny odpowiedzialny za rysowanie siatki
